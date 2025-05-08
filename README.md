@@ -100,6 +100,7 @@ password: daa123
 - Java JDK 17 trở lên
 - Maven 3.6.x trở lên
 - IDE (khuyến nghị IntelliJ IDEA hoặc Eclipse)
+- Docker (để chạy database PostgreSQL)
 
 ### Các Bước Cài Đặt
 1. Clone repository:
@@ -190,6 +191,7 @@ Response:
 - Spring Boot Framework
 - Cấu trúc dữ liệu và thuật toán cơ bản
 - RESTful API
+- Docker
 
 ### Công Cụ Cần Thiết
 - Git
