@@ -78,6 +78,21 @@ Dự án này là một hệ thống gợi ý từ (autocomplete) và kiểm tra
 │                     Kết thúc                                │
 └─────────────────────────────────────────────────────────────┘
 ```
+## Cài Đặt Database
+1. Di chuyển đến thư mục data:
+```bash
+cd src\main\java\hus\daa\app\data
+```
+2. Chạy file docker-compose.yml:
+```bash
+docker-compose up -d
+```
+3. Kiểm tra kết nối đến database:
+```
+Có thể dùng Dbear chọn postgresql và kết nối đến localhost:5432
+username: daa
+password: daa123
+```
 
 ## Cài Đặt
 
