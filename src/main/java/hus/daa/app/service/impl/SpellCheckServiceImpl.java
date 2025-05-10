@@ -39,7 +39,7 @@ public class SpellCheckServiceImpl implements SpellCheckService {
     }
 
     @Override
-    public List<String> getCorrections(String word, int maxDistance, int limit) {
+    public List<String> getCorrectionsLD(String word, int maxDistance, int limit) {
         if (tst.search(word)) {
             return new ArrayList<>();
         }
@@ -62,5 +62,15 @@ public class SpellCheckServiceImpl implements SpellCheckService {
         }
 
         return corrections;
+    }
+
+    @Override
+    public List<String> getCorrectionsTST(String word, int limit) {
+        if (tst.search(word)) {
+            return new ArrayList<>();
+        }
+
+        List<String> corrections = tst.getWordsWithPrefix(word);
+        return corrections.size() > limit ? corrections.subList(0, limit) : corrections;
     }
 }

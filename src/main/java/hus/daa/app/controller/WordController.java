@@ -21,18 +21,44 @@ public class WordController {
     private final SpellCheckService spellCheckService;
 
 
-    @GetMapping("/autocomplete")
-    public ResponseEntity<Map<String, Object>> autocomplete(@RequestParam String prefix,
+    @GetMapping("/tst/autocomplete")
+    public ResponseEntity<Map<String, Object>> autocompleteTST(@RequestParam String prefix,
                                                             @RequestParam(defaultValue = "10") int limit) {
 
         Map<String, Object> response = new HashMap<>();
         response.put("prefix", prefix);
-        response.put("suggestions", autocompleteService.getSuggestions(prefix, limit));
+        response.put("suggestions", autocompleteService.getSuggestionsTST(prefix, limit));
 
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/spellcheck")
+    @GetMapping("/tst/spellcheck")
+    public ResponseEntity<Map<String, Object>> spellCheckTST(@RequestParam String word,
+                                                              @RequestParam(defaultValue = "10") int limit) {
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("word", word);
+
+        List<String> corrections = spellCheckService.getCorrectionsTST(word, limit);
+        response.put("isCorrect", corrections.isEmpty());
+        response.put("suggestions", corrections);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/ld/autocomplete")
+    public ResponseEntity<Map<String, Object>> autocompleteLD(  @RequestParam String perfix,
+                                                                @RequestParam(defaultValue = "2") int maxDistance,
+                                                                @RequestParam(defaultValue = "10") int limit) {
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("prefix", perfix);
+        response.put("suggestions", autocompleteService.getSuggestionsLD(perfix,maxDistance, limit));
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/ld/spellcheck")
     public ResponseEntity<Map<String, Object>> spellCheck(@RequestParam String word,
                                                           @RequestParam(defaultValue = "2") int maxDistance,
                                                           @RequestParam(defaultValue = "10") int limit) {
@@ -40,7 +66,7 @@ public class WordController {
         Map<String, Object> response = new HashMap<>();
         response.put("word", word);
 
-        List<String> corrections = spellCheckService.getCorrections(word, maxDistance, limit);
+        List<String> corrections = spellCheckService.getCorrectionsLD(word, maxDistance, limit);
         response.put("isCorrect", corrections.isEmpty());
         response.put("suggestions", corrections);
 
