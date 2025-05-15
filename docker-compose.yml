@@ -1,0 +1,38 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://178.128.106.16:5432/vn_words
+      SPRING_DATASOURCE_USERNAME: daa
+      SPRING_DATASOURCE_PASSWORD: daa123
+    depends_on:
+      - vn_words
+
+  frontend:
+    build:
+      context: ./src/main/resources/static/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
+  vn_words:
+    build:
+      context: ./src/main/java/hus/daa/app/data
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      POSTGRES_USER: daa
+      POSTGRES_PASSWORD: daa123
+      POSTGRES_DB: vn_words
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    driver: local

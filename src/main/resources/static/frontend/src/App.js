@@ -10,10 +10,10 @@ const App = () => {
       if (mode === "LD") {
           const fetchData = async () => {
               try {
-                  const response = await fetch(`http://localhost:8080/api/words/ld/spellcheck?word=${search}&maxDistance=10&limit=10`);
+                  const response = await fetch(`http://178.128.106.16:8080/api/words/ld/spellcheck?word=${search}&maxDistance=10&limit=10`);
                   const result = await response.json();
                   if(result["isCorrect"]) {
-                      const res = await   fetch(`http://localhost:8080/api/words/ld/autocomplete?perfix=${search}&maxDistance=2&limit=10`);
+                      const res = await   fetch(`http://178.128.106.16:8080/api/words/ld/autocomplete?perfix=${search}&maxDistance=2&limit=10`);
                       const r = await res.json();
                       setData(r["suggestions"]);
                   } else {
@@ -28,10 +28,10 @@ const App = () => {
       } else {
             const fetchData = async () => {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/words/tst/spellcheck?word=${search}&limit=15`);
+                    const response = await fetch(`http://178.128.106.16:8080/api/words/tst/spellcheck?word=${search}&limit=15`);
                     const result = await response.json();
                     if(result["isCorrect"]) {
-                        const res = await   fetch(`http://localhost:8080/api/words/tst/autocomplete?prefix=${search}&limit=10`);
+                        const res = await   fetch(`http://178.128.106.16:8080/api/words/tst/autocomplete?prefix=${search}&limit=10`);
                         const r = await res.json();
                         setData(r["suggestions"]);
                     } else {
